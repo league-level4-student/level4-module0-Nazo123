@@ -40,7 +40,7 @@ public class GridPanel extends JPanel{
 		
 		for(int i = 0; i<array.length;i++) {
 			for(int j = 0; j<array[i].length;j++) {
-				array[i][j] = new Pixel(i, j);
+				array[i][j] = new Pixel(i*pixelWidth, j*pixelHeight);
 			}
 		}
 		
@@ -65,7 +65,7 @@ public class GridPanel extends JPanel{
 		for(int i = 0; i<array.length;i++) {
 			for(int j = 0; j<array[i].length;j++) {
 				g.setColor(array[i][j].color);
-				g.drawRect(array[i][j].x,array[i][j].y,pixelWidth,pixelHeight);
+				g.fillRect(array[i][j].x,array[i][j].y,pixelWidth,pixelHeight);
 			
 				
 			}

@@ -27,27 +27,43 @@ Cell[][] array;
 		addMouseListener(this);
 		timer = new Timer(500, this);
 		this.cellsPerRow = cpr;
+
 	
 		//2. Calculate the cell size.
-		
+		int size = w/cpr;
+		this.cellSize = size;
 		//3. Initialize the cell array to the appropriate size.
-		
+		array = new Cell[cpr][cpr];
 		//3. Iterate through the array and initialize each cell.
 		//   Don't forget to consider the cell's dimensions when 
 		//   passing in the location.
+		for(int i = 0; i < array.length;i++) {
+			for(int j = 0; j < array[i].length;j++) {
+				array[i][j] = new Cell(i*size,j*size,size);
+			}
+		}
 		
 	}
 	
 	public void randomizeCells() {
+		Random r = new Random();
 		//4. Iterate through each cell and randomly set each
 		//   cell's isAlive memeber to true of false
-		
+		for(int i = 0; i < array.length;i++) {
+			for(int j = 0; j < array[i].length;j++) {
+				array[i][j].isAlive = r.nextBoolean(); 
+			}
+		}
 		repaint();
 	}
 	
 	public void clearCells() {
 		//5. Iterate through the cells and set them all to dead.
-		
+		for(int i = 0; i < array.length;i++) {
+			for(int j = 0; j < array[i].length;j++) {
+				array[i][j].isAlive = false; 
+			}
+		}
 		repaint();
 	}
 	
@@ -66,7 +82,11 @@ Cell[][] array;
 	@Override
 	public void paintComponent(Graphics g) {
 		//6. Iterate through the cells and draw them all
-		
+		for(int i = 0; i < array.length;i++) {
+			for(int j = 0; j < array[i].length;j++) {
+				array[i][j].draw(g);
+			}
+		}
 		
 		
 		// draws grid
@@ -77,8 +97,12 @@ Cell[][] array;
 	//advances world one step
 	public void step() {
 		//7. iterate through cells and fill in the livingNeighbors array
-		// . using the getLivingNeighbors method.
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
+	
+		// . using the getLivingNeighbors method.
+		
+
+		
 		
 		//8. check if each cell should live or die
 	
@@ -93,6 +117,32 @@ Cell[][] array;
 	//   living neighbors there are of the 
 	//   cell identified by x and y
 	public int getLivingNeighbors(int x, int y){
+		int counter = 0;
+		if(array[x-cellSize][y].isAlive) {
+			counter++;
+	}
+		if(array[x-cellSize][y-cellSize].isAlive) {
+			counter++;
+	}
+		if(array[x-cellSize][y+cellSize].isAlive) {
+			counter++;
+	}
+		if(array[x][y+cellSize].isAlive) {
+			counter++;
+	}
+		if(array[x][y-cellSize].isAlive) {
+			counter++;
+	}
+		if(array[x+cellSize][y+cellSize].isAlive) {
+			counter++;
+	}
+		if(array[x+cellSize][y].isAlive) {
+			counter++;
+	}
+		if(array[x+cellSize][y-cellSize].isAlive) {
+			counter++;
+	}
+
 		return 0;
 	}
 
@@ -118,7 +168,7 @@ Cell[][] array;
 		//10. Use e.getX() and e.getY() to determine
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
-		
+		array[e.getX()][e.getY()].isAlive=true;
 		
 		
 		
