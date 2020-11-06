@@ -100,12 +100,17 @@ Cell[][] array;
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
 	
 		// . using the getLivingNeighbors method.
-		
-
-		
-		
+		for(int i = 0; i < livingNeighbors.length;i++) {
+			for(int j = 0; j < livingNeighbors[i].length;j++) {
+				livingNeighbors[i][j] = getLivingNeighbors(i,j);
+			}
+		}
 		//8. check if each cell should live or die
-	
+		for(int i = 0; i < array.length;i++) {
+			for(int j = 0; j < array[i].length;j++) {
+			array[i][j].liveOrDie(livingNeighbors[i][j]);
+			}
+		}
 		
 		
 		
@@ -118,32 +123,48 @@ Cell[][] array;
 	//   cell identified by x and y
 	public int getLivingNeighbors(int x, int y){
 		int counter = 0;
-		if(array[x-cellSize][y].isAlive) {
+		if(x-1>0) {
+		if(array[x-1][y].isAlive) {
 			counter++;
 	}
-		if(array[x-cellSize][y-cellSize].isAlive) {
+		if(y-1>0) {
+		if(array[x-1][y-1].isAlive) {
 			counter++;
 	}
-		if(array[x-cellSize][y+cellSize].isAlive) {
+		}
+		if(y+1<cellsPerRow) {
+		if(array[x-1][y+1].isAlive) {
 			counter++;
 	}
-		if(array[x][y+cellSize].isAlive) {
+		}
+		}
+		if(y+1<cellsPerRow) {
+		if(array[x][y+1].isAlive) {
 			counter++;
 	}
-		if(array[x][y-cellSize].isAlive) {
+		}
+		if(y-1>0) {
+		if(array[x][y-1].isAlive) {
 			counter++;
 	}
-		if(array[x+cellSize][y+cellSize].isAlive) {
+		}
+		if(x+1<cellsPerRow) {
+			if(y+1<cellsPerRow) {
+		if(array[x+1][y+1].isAlive) {
 			counter++;
 	}
-		if(array[x+cellSize][y].isAlive) {
+			}
+		if(array[x+1][y].isAlive) {
 			counter++;
 	}
-		if(array[x+cellSize][y-cellSize].isAlive) {
+		if(y-1>0) {
+		if(array[x+1][y-1].isAlive) {
 			counter++;
 	}
+		}
+		}
 
-		return 0;
+		return counter;
 	}
 
 	@Override
@@ -168,7 +189,12 @@ Cell[][] array;
 		//10. Use e.getX() and e.getY() to determine
 		//    which cell is clicked. Then toggle
 		//    the isAlive variable for that cell.
-		array[e.getX()][e.getY()].isAlive=true;
+		if(array[e.getX()/cellSize][e.getY()/cellSize].isAlive==true) {
+			array[e.getX()/cellSize][e.getY()/cellSize].isAlive = false;
+		}
+		else {
+			array[e.getX()/cellSize][e.getY()/cellSize].isAlive = true;
+		}
 		
 		
 		
