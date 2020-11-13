@@ -44,9 +44,113 @@ package extras.the_wrong_way_cow;
 public class TheWrongWayCow {
 
     public static int[] findWrongWayCow(final char[][] field) {
+    	int NorthCow = 0;
+    	int SouthCow = 0;
+    	int EastCow = 0;
+    	int WestCow = 0;
+    
         // Fill in the code to return the x,y coordinate position of the
         // head (letter 'c') of the wrong way cow!
-        
+    	for(int i = 0; i<field.length;i++) {
+    		for(int j = 0; j<field[i].length-2;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i][j+1]=='o') {
+    					if(field[i][j+2]=='w') {
+    						WestCow++;
+    					}
+    				}
+    			}
+    		}
+    	}
+    	for(int i = 0; i<field.length;i++) {
+    		for(int j = 2; j<field[i].length;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i][j-1]=='o') {
+    					if(field[i][j-2]=='w') {
+    						EastCow++;
+    					}
+    				}
+    			}
+    		}
+    	}
+    	for(int i = 0; i<field.length-2;i++) {
+    		for(int j = 2; j<field[i].length;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i+1][j]=='o') {
+    					if(field[i+2][j]=='w') {
+    						SouthCow++;
+    					}
+    				}
+    			}
+    		}
+    	}
+      	for(int i = 2; i<field.length;i++) {
+    		for(int j = 2; j<field[i].length;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i-1][j]=='o') {
+    					if(field[i-2][j]=='w') {
+    						NorthCow++;
+    					}
+    				}
+    			}
+    		}
+    	}
+      	if(WestCow==1) {
+     	for(int i = 0; i<field.length;i++) {
+    		for(int j = 0; j<field[i].length-2;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i][j+1]=='o') {
+    					if(field[i][j+2]=='w') {
+    						int[] w = {j,i};
+    						return w;
+    					}
+    				}
+    			}
+    		}
+    	}
+    }
+      	if(EastCow==1) {
+    	for(int i = 0; i<field.length;i++) {
+    		for(int j = 2; j<field[i].length;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i][j-1]=='o') {
+    					if(field[i][j-2]=='w') {
+    						int[] w = {j,i};
+    						return w;
+    					}
+    				}
+    			}
+    		}
+    	}
+      	}
+    	if(SouthCow==1) {
+    	for(int i = 0; i<field.length-2;i++) {
+    		for(int j = 2; j<field[i].length;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i+1][j]=='o') {
+    					if(field[i+2][j]=='w') {
+    						int[] w = {j,i};
+    						return w;
+    					}
+    				}
+    			}
+    		}
+    	}
+    	}
+    	if(NorthCow==1) {
+      	for(int i = 2; i<field.length;i++) {
+    		for(int j = 2; j<field[i].length;j++) {
+    			if(field[i][j]=='c') {
+    				if(field[i-1][j]=='o') {
+    					if(field[i-2][j]=='w') {
+    						int[] w = {j,i};
+    						return w;
+    					}
+    				}
+    			}
+    		}
+    	}
+    }
         return null;
     }
 }
