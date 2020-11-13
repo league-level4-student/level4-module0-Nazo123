@@ -20,13 +20,14 @@ public class MazeMaker{
 		width = w;
 		height = h;
 		maze = new Maze(width, height);
-		
+		Cell str = maze.getCell(0, randGen.nextInt(4));
 		//4. select a random cell to start
-		selectNextPath(maze.getCell(randGen.nextInt(width),randGen.nextInt(height)));
-		
+		selectNextPath(str);
+		str.setWestWall(false);
+		Cell end = maze.getCell(4,randGen.nextInt(4));
 		//5. call selectNextPath method with the randomly selected cell
-		
-		
+		selectNextPath(end);
+		end.setEastWall(false);
 		return maze;
 	}
 
